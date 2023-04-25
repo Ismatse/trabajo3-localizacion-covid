@@ -21,7 +21,10 @@ import com.practica.genericas.Persona;
 import com.practica.genericas.PosicionPersona;
 import com.practica.lista.ListaContactos;
 
+
 public class ContactosCovid {
+	public static final String PERSONA = "PERSONA";
+	public static final String LOCALIZACION = "LOCALIZACION";
 	private Poblacion poblacion;
 	private Localizacion localizacion;
 	private ListaContactos listaContactos;
@@ -66,19 +69,19 @@ public class ContactosCovid {
 			this.localizacion = new Localizacion();
 			this.listaContactos = new ListaContactos();
 		}
-		String datas[] = dividirEntrada(data);
+		String[] datas = dividirEntrada(data);
 		for (String linea : datas) {
-			String datos[] = this.dividirLineaData(linea);
-			if (!datos[0].equals("PERSONA") && !datos[0].equals("LOCALIZACION")) {
+			String[] datos = this.dividirLineaData(linea);
+			if (!datos[0].equals(PERSONA) && !datos[0].equals(LOCALIZACION)) {
 				throw new EmsInvalidTypeException();
 			}
-			if (datos[0].equals("PERSONA")) {
+			if (datos[0].equals(PERSONA)) {
 				if (datos.length != Constantes.MAX_DATOS_PERSONA) {
 					throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
 				}
 				this.poblacion.addPersona(this.crearPersona(datos));
 			}
-			if (datos[0].equals("LOCALIZACION")) {
+			if (datos[0].equals(LOCALIZACION)) {
 				if (datos.length != Constantes.MAX_DATOS_LOCALIZACION) {
 					throw new EmsInvalidNumberOfDataException("El número de datos para LOCALIZACION es menor de 6");
 				}
@@ -93,7 +96,8 @@ public class ContactosCovid {
 		File archivo = null;
 		FileReader fr = null;
 		BufferedReader br = null;
-		String datas[] = null, data = null;
+		String[] datas = null;
+		String data = null;
 		loadDataFile(fichero, reset, archivo, fr, br, datas, data);
 		
 	}
@@ -120,16 +124,16 @@ public class ContactosCovid {
 				datas = dividirEntrada(data.trim());
 				for (String linea : datas) {
 					String datos[] = this.dividirLineaData(linea);
-					if (!datos[0].equals("PERSONA") && !datos[0].equals("LOCALIZACION")) {
+					if (!datos[0].equals(PERSONA) && !datos[0].equals(LOCALIZACION)) {
 						throw new EmsInvalidTypeException();
 					}
-					if (datos[0].equals("PERSONA")) {
+					if (datos[0].equals(PERSONA)) {
 						if (datos.length != Constantes.MAX_DATOS_PERSONA) {
 							throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
 						}
 						this.poblacion.addPersona(this.crearPersona(datos));
 					}
-					if (datos[0].equals("LOCALIZACION")) {
+					if (datos[0].equals(LOCALIZACION)) {
 						if (datos.length != Constantes.MAX_DATOS_LOCALIZACION) {
 							throw new EmsInvalidNumberOfDataException(
 									"El número de datos para LOCALIZACION es menor de 6" );
