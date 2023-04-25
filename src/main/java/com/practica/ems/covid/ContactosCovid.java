@@ -101,7 +101,7 @@ public class ContactosCovid {
 		loadDataFile(fichero, reset, archivo, fr, br, datas, data);
 		
 	}
-	public void check_lineaDatos(String[] datos){
+	public void checkLineaDatos(String[] datos){
 
 		try{
 		if (!datos[0].equals(PERSONA) && !datos[0].equals(LOCALIZACION)) {
@@ -129,10 +129,10 @@ public class ContactosCovid {
 	}
 
 	}
-	public void check_entrada(String[] datas){
+	public void checkEntrada(String[] datas){
 		for (String linea : datas) {
 			String datos[] = this.dividirLineaData(linea);
-			check_lineaDatos(datos);
+			checkLineaDatos(datos);
 		}
 	}
 	public void loadDataFile(String fichero, boolean reset, File archivo, FileReader fr, BufferedReader br, String datas[], String data ) {
@@ -154,7 +154,7 @@ public class ContactosCovid {
 			 */
 			while ((data = br.readLine()) != null) {
 				datas = dividirEntrada(data.trim());
-				check_entrada(datas);
+				checkEntrada(datas);
 			}
 			}catch (Exception e2) {
 				e2.printStackTrace();
