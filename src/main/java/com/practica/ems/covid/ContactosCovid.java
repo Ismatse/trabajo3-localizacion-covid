@@ -135,8 +135,6 @@ public class ContactosCovid {
 			check_lineaDatos(datos);
 		}
 	}
-
-	@SuppressWarnings("resource")
 	public void loadDataFile(String fichero, boolean reset, File archivo, FileReader fr, BufferedReader br, String datas[], String data ) {
 		try{
 			// Apertura del fichero y creacion de BufferedReader para poder
@@ -157,21 +155,17 @@ public class ContactosCovid {
 			while ((data = br.readLine()) != null) {
 				datas = dividirEntrada(data.trim());
 				check_entrada(datas);
-
-			try {
-				if (null != fr) {
-					fr.close();
-				}
-			} catch (Exception e2) {
+			}
+			}catch (Exception e2) {
 				e2.printStackTrace();
 			}
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
+			
+
 	
-		}
 	
-	}
+}
+	@SuppressWarnings("resource")
+
 	public int findPersona(String documento) throws EmsPersonNotFoundException {
 		int pos;
 		try {
