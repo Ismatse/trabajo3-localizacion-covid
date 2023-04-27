@@ -1,6 +1,6 @@
 package com.practica.ems.covid;
 
-import org.apache.commons.beanutils.BeanUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
