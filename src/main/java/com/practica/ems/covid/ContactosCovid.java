@@ -94,44 +94,11 @@ public class ContactosCovid {
 
 	public void loadDataFile(String fichero, boolean reset) {
 		File archivo = null;
-		loadDataFile(fichero, reset, archivo);
+		loadDataFiles(fichero, reset, archivo);
 		
 	}
-	public void checkLineaDatos(String[] datos){
 
-		try{
-		if (!datos[0].equals(PERSONA) && !datos[0].equals(LOCALIZACION)) {
-			throw new EmsInvalidTypeException();
-		}
-		if (datos[0].equals(PERSONA)) {
-			if (datos.length != Constantes.MAX_DATOS_PERSONA) {
-				throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
-			}
-			this.poblacion.addPersona(this.crearPersona(datos));
-		}
-		if (datos[0].equals(LOCALIZACION)) {
-			if (datos.length != Constantes.MAX_DATOS_LOCALIZACION) {
-				throw new EmsInvalidNumberOfDataException(
-						"El número de datos para LOCALIZACION es menor de 6" );
-			}
-			PosicionPersona pp = this.crearPosicionPersona(datos);
-			this.localizacion.addLocalizacion(pp);
-			this.listaContactos.insertarNodoTemporal(pp);
-		}
-
-	}catch (Exception e) {
-		e.printStackTrace();
-
-	}
-
-	}
-	public void checkEntrada(String[] datas){
-		for (String linea : datas) {
-			String datos[] = this.dividirLineaData(linea);
-			checkLineaDatos(datos);
-		}
-	}
-	public void loadDataFile(String fichero, boolean reset, File archivo) {
+	public void loadDataFiles(String fichero, boolean reset, File archivo) {
 		try{
 			String datas[]= null;
 			String data= null ;
@@ -148,7 +115,10 @@ public class ContactosCovid {
 
 			while ((data = br.readLine()) != null) {
 				datas = dividirEntrada(data.trim());
-				checkEntrada(datas);
+				for (String linea : datas) {
+					String datos[] = this.dividirLineaData(linea);
+					loadData(data, reset);
+				}
 			}
 			}catch (Exception e2) {
 				e2.printStackTrace();
