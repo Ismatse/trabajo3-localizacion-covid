@@ -1,6 +1,6 @@
 package com.practica.ems.covid;
 
-
+import org.apache.commons.beanutils.BeanUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -226,33 +226,13 @@ public class ContactosCovid {
 	}
 
 	private Persona crearPersona(String[] data) {
-		Persona persona = new Persona();
+
+		String [] s= { "nombre", "apellidos", "documento","email", "direccion", "cp", "fechaNacimiento"};
 		for (int i = 1; i < Constantes.MAX_DATOS_PERSONA; i++) {
-			String s = data[i];
-			switch (i) {
-			case 1:
-				persona.setDocumento(s);
-				break;
-			case 2:
-				persona.setNombre(s);
-				break;
-			case 3:
-				persona.setApellidos(s);
-				break;
-			case 4:
-				persona.setEmail(s);
-				break;
-			case 5:
-				persona.setDireccion(s);
-				break;
-			case 6:
-				persona.setCp(s);
-				break;
-			case 7:
-				persona.setFechaNacimiento(parsearFecha(s));
-				break;
-			}
+			 s[i-1] = data[i];
 		}
+	
+		Persona persona = new Persona(s[0],s[1],s[2],s[3],s[4],s[5],parsearFecha(s[6]));
 		return persona;
 	}
 
