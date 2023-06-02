@@ -39,6 +39,7 @@ public class FechaHora implements Comparable<FechaHora>{
 			this.anio = anio;
 		}
 
+
 		@Override
 		public String toString() {
 			String cadena = String.format("%2d/%02d/%4d",dia,mes,anio);
@@ -89,6 +90,21 @@ public class FechaHora implements Comparable<FechaHora>{
 		super();
 		this.fecha = fecha;
 		this.hora = hora;
+	}
+	public FechaHora(String fecha) {
+		String[] valores = fecha.split("\\/");
+		this.fecha.dia = Integer.parseInt(valores[0]);
+		this.fecha.mes = Integer.parseInt(valores[1]);
+		this.fecha.anio = Integer.parseInt(valores[2]);
+	}
+	public FechaHora(String fecha,String hora) {
+		String[] valores = fecha.split("\\/");
+		this.fecha.dia = Integer.parseInt(valores[0]);
+		this.fecha.mes = Integer.parseInt(valores[1]);
+		this.fecha.anio = Integer.parseInt(valores[2]);
+		valores = hora.split("\\:");
+		this.hora.hora = Integer.parseInt(valores[0]);
+		this.hora.minuto = Integer.parseInt(valores[1]);
 	}
 
 	public FechaHora(int dia, int mes, int anio, int hora, int minuto) {
