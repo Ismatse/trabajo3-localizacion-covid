@@ -116,6 +116,7 @@ public class ContactosCovid {
 			while ((data = br.readLine()) != null) {
 				datas = dividirEntrada(data.trim());
 				for (String linea : datas) {
+
 					loadData(data, reset);
 				}
 			}
