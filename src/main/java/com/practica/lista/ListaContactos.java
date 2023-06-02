@@ -4,6 +4,8 @@ package com.practica.lista;
 import com.practica.genericas.FechaHora;
 import com.practica.genericas.PosicionPersona;
 
+import javafx.stage.Modality;
+
 public class ListaContactos {
 	private NodoTemporal lista;
 	private int size;
@@ -145,31 +147,19 @@ public class ListaContactos {
 	 * nuestra lista funciona de manera correcta.
 	 */
 	public int numPersonasEntreDosInstantes(FechaHora inicio, FechaHora fin) {
-		if(this.size==0)
-			return 0;
-		NodoTemporal aux = lista;
-		int cont = 0;
-		cont = 0;
-		while(aux!=null) {
-			if(aux.getFecha().compareTo(inicio)>=0 && aux.getFecha().compareTo(fin)<=0) {
-				NodoPosicion nodo = aux.getListaCoordenadas();
-				while(nodo!=null) {
-					cont = cont + nodo.getNumPersonas();
-					nodo = nodo.getSiguiente();
-				}				
-				aux = aux.getSiguiente();
-			}else {
-				aux=aux.getSiguiente();
-			}
-		}
-		return cont;
+		return numEntreDosInstantes(inicio, fin, 0);
 	}
 	
 	
 	
 	public int numNodosCoordenadaEntreDosInstantes(FechaHora inicio, FechaHora fin) {
+
+		return numEntreDosInstantes(inicio, fin, 1);
+	}
+
+	public int numEntreDosInstantes(FechaHora inicio, FechaHora fin,int eleccion){
 		if(this.size==0)
-			return 0;
+		return 0;
 		NodoTemporal aux = lista;
 		int cont = 0;
 		cont = 0;
@@ -177,7 +167,12 @@ public class ListaContactos {
 			if(aux.getFecha().compareTo(inicio)>=0 && aux.getFecha().compareTo(fin)<=0) {
 				NodoPosicion nodo = aux.getListaCoordenadas();
 				while(nodo!=null) {
-					cont = cont + 1;
+					if(eleccion==1){
+					cont = cont+1;
+					}
+					else{
+					cont=cont +nodo.getNumPersonas();
+					}
 					nodo = nodo.getSiguiente();
 				}				
 				aux = aux.getSiguiente();
@@ -185,8 +180,10 @@ public class ListaContactos {
 				aux=aux.getSiguiente();
 			}
 		}
-		return cont;
+	return cont;
 	}
+
+
 	
 	
 	
